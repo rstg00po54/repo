@@ -5,7 +5,7 @@
 import os
 REPO_URL = os.environ.get('REPO_URL', None)
 if not REPO_URL:
-  REPO_URL = 'https://gerrit.googlesource.com/git-repo'
+  REPO_URL = 'ssh://admin@baixd.wicp.top:7008/repo/repo'
 REPO_REV = 'stable'
 
 # Copyright (C) 2008 Google Inc.
@@ -347,10 +347,11 @@ def _Init(args, gitc_init=False):
     dst = os.path.abspath(os.path.join(repodir, S_repo))
     _Clone(url, dst, opt.quiet, not opt.no_clone_bundle)
 
-    if can_verify and not opt.no_repo_verify:
-      rev = _Verify(dst, branch, opt.quiet)
-    else:
-      rev = 'refs/remotes/origin/%s^0' % branch
+    # if can_verify and not opt.no_repo_verify:
+    #   rev = _Verify(dst, branch, opt.quiet)
+    # else:
+    #   rev = 'refs/remotes/origin/%s^0' % branch
+    rev = 'refs/remotes/origin/%s^0' % branch
 
     _Checkout(dst, branch, rev, opt.quiet)
   except CloneFailure:
